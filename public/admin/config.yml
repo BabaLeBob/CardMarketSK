@@ -2,6 +2,8 @@ backend:
   name: github
   repo: babalebob/CardMarketSK
   branch: main
+  site_domain: babalebob.github.io/CardMarketSK
+  base_url: https://decap-cms-oauth-provider.vercel.app # Serveur OAuth public gratuit
 
 media_folder: "public/images/uploads"
 public_folder: "/CardMarketSK/images/uploads"
@@ -21,7 +23,7 @@ collections:
     create: true
     fields:
       - { label: "Nom de la carte", name: "name", widget: "string" }
-      - { label: "ID de la Série (slug de la série)", name: "seriesId", widget: "string" }
+      - { label: "ID de la Série", name: "seriesId", widget: "string" }
       - { label: "Numéro de carte", name: "numberInSet", widget: "string" }
       - label: "Versions"
         name: "versions"
