@@ -2,8 +2,7 @@ backend:
   name: github
   repo: babalebob/CardMarketSK
   branch: main
-  site_domain: babalebob.github.io/CardMarketSK
-  base_url: https://decap-cms-oauth-provider.vercel.app # Serveur OAuth public gratuit
+  auth_type: implicit
 
 media_folder: "public/images/uploads"
 public_folder: "/CardMarketSK/images/uploads"
