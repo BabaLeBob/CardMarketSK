@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+
+const allSeries = await getCollection('series');
+const allCards = await getCollection('cards');
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mon Card Market</title>
+    <style>
+      body { font-family: sans-serif; background: #0f172a; color: #fff; padding: 20px; max-width: 1000px; margin: 0 auto; }
+      h1 { color: #38bdf8; text-align: center; }
+      .series-box { background: #1e293b; border-radius: 8px; padding: 20px; margin-bottom: 25px; border: 1px solid #334155; }
+      .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+      .card-item { background: #0f172a; padding: 15px; border-radius: 6px; border: 1px solid #334155; }
+      .card-item img { max-width: 100%; border-radius: 4px; }
+      .version-tag { background: #0284c7; font-size: 0.8em; padding: 2px 6px; border-radius: 4px; margin-right: 5px; }
+      .price-table { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: 0.9em; }
+      .price-table td { padding: 4px 0; border-bottom: 1px dashed #334155; }
+      .price { color: #4ade80; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Catalogue Card Market</h1>
+
+    {allSeries.map((series) => {
+      const cardsInSeries = allCards.filter((c) => c.data.seriesId === series.slug);
+      return (
+        <div class="series-box">
+          <h2>{series.data.title} <small>({series.data.code})</small></h2>
+          
+          <div class="cards-grid">
+            {cardsInSeries.map((card) => (
+              <div class="card-item">
+                <h3>{card.data.name} #{card.data.numberInSet}</h3>
+                
+                {card.data.versions.map((ver) => (
+                  <div style="margin-top: 10px;">
+                    <div><span class="version-tag">{ver.versionLabel}</span></div>
+                    {ver.image && <img src={ver.image} alt={card.data.name} />}
+                    
+                    <table class="price-table">
+                      {ver.listings.map((listing) => (
+                        <tr>
+                          <td>{listing.condition} (x{listing.stock})</td>
+                          <td class="price">{listing.price.toFixed(2)} €</td>
+                        </tr>
+                      ))}
+                    </table>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    })}
+  </body>
+</html>

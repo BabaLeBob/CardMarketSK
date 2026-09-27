@@ -1,0 +1,38 @@
+backend:
+  name: github
+  repo: BabaLeBob/CardMarketSK
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/CardMarketSK/images/uploads"
+
+collections:
+  - name: "series"
+    label: "Séries"
+    folder: "src/content/series"
+    create: true
+    fields:
+      - { label: "Nom de la Série", name: "title", widget: "string" }
+      - { label: "Code de la Série (ex: SV01)", name: "code", widget: "string" }
+
+  - name: "cards"
+    label: "Cartes"
+    folder: "src/content/cards"
+    create: true
+    fields:
+      - { label: "Nom de la carte", name: "name", widget: "string" }
+      - { label: "ID de la Série (slug de la série)", name: "seriesId", widget: "string" }
+      - { label: "Numéro de carte", name: "numberInSet", widget: "string" }
+      - label: "Versions"
+        name: "versions"
+        widget: "list"
+        fields:
+          - { label: "Nom de la Version (V1, V2...)", name: "versionLabel", widget: "string" }
+          - { label: "Image de la Carte", name: "image", widget: "image" }
+          - label: "Offres / Ventes"
+            name: "listings"
+            widget: "list"
+            fields:
+              - { label: "État (Mint, EX...)", name: "condition", widget: "string" }
+              - { label: "Prix (€)", name: "price", widget: "number", value_type: "float" }
+              - { label: "Stock", name: "stock", widget: "number", default: 1 }
