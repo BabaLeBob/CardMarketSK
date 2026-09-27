@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: BabaLeBob/CardMarketSK
+  repo: babalebob/CardMarketSK
   branch: main
 
 media_folder: "public/images/uploads"

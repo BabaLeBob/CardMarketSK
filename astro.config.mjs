@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://BabaLeBob.github.io',
+  site: 'https://babalebob.github.io',
   base: '/CardMarketSK',
 });
